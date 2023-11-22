@@ -1,10 +1,17 @@
 function writeAccMag () {
-    serial.writeLine("" + control.millis() + delimiter + input.acceleration(Dimension.X) + delimiter + input.acceleration(Dimension.Y) + delimiter + input.acceleration(Dimension.Z) + delimiter + input.magneticForce(Dimension.X) + delimiter + input.magneticForce(Dimension.Y) + delimiter + input.magneticForce(Dimension.Z))
+    serial.writeLine("" + control.micros() + delimiter + input.acceleration(Dimension.X) + delimiter + input.acceleration(Dimension.Y) + delimiter + input.acceleration(Dimension.Z) + delimiter + input.magneticForce(Dimension.X) + delimiter + input.magneticForce(Dimension.Y) + delimiter + input.magneticForce(Dimension.Z))
 }
 function writeMagOnly () {
-    serial.writeLine("" + control.millis() + delimiter + input.magneticForce(Dimension.X) + delimiter + input.magneticForce(Dimension.Y) + delimiter + input.magneticForce(Dimension.Z))
+    serial.writeLine("" + control.micros() + delimiter + input.magneticForce(Dimension.X) + delimiter + input.magneticForce(Dimension.Y) + delimiter + input.magneticForce(Dimension.Z))
+}
+function writeAccOnly () {
+    serial.writeLine("" + control.micros() + delimiter + input.acceleration(Dimension.X) + delimiter + input.acceleration(Dimension.Y) + delimiter + input.acceleration(Dimension.Z))
+}
+function writeTimeOnly () {
+    serial.writeLine("" + (control.micros()))
 }
 let delimiter = ""
+let loop_time = 0
 basic.showLeds(`
     # # # # #
     . # . . #
@@ -13,13 +20,15 @@ basic.showLeds(`
     # # # # #
     `)
 delimiter = " "
-let loop_time = 0
+loops.everyInterval(1, function () {
+	
+})
 control.inBackground(function () {
     while (true) {
-        writeMagOnly()
-        while (control.millis() - loop_time < 5) {
+        writeAccOnly()
+        while (control.micros() - loop_time < 5000) {
         	
         }
-        loop_time = control.millis()
+        loop_time = control.micros()
     }
 })
