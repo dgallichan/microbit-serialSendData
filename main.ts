@@ -19,7 +19,7 @@ basic.showLeds(`
     . # . . #
     # # # # #
     `)
-delimiter = " "
+delimiter = ","
 control.inBackground(function () {
     while (true) {
         writeMagOnly()
