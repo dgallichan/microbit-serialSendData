@@ -20,13 +20,10 @@ basic.showLeds(`
     # # # # #
     `)
 delimiter = " "
-loops.everyInterval(1, function () {
-	
-})
 control.inBackground(function () {
     while (true) {
-        writeAccOnly()
-        while (control.micros() - loop_time < 5000) {
+        writeMagOnly()
+        while (control.micros() - loop_time < 25000) {
         	
         }
         loop_time = control.micros()
