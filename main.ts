@@ -7,6 +7,9 @@ function writeMagOnly () {
 function writeAccOnly () {
     serial.writeLine("" + control.micros() + delimiter + input.acceleration(Dimension.X) + delimiter + input.acceleration(Dimension.Y) + delimiter + input.acceleration(Dimension.Z))
 }
+function writeP2 () {
+    serial.writeLine("" + control.micros() + delimiter + pins.analogReadPin(AnalogPin.P2))
+}
 function writeTimeOnly () {
     serial.writeLine("" + (control.micros()))
 }
@@ -22,8 +25,8 @@ basic.showLeds(`
 delimiter = ","
 control.inBackground(function () {
     while (true) {
-        writeMagOnly()
-        while (control.micros() - loop_time < 25000) {
+        writeP2()
+        while (control.micros() - loop_time < 5000) {
         	
         }
         loop_time = control.micros()
