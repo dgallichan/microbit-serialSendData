@@ -46,6 +46,9 @@ function writePin () {
     comment = "Ouptut Mode 4"
     serial.writeLine("" + (pins.analogReadPin(AnalogPin.P0)))
 }
+input.onButtonPressed(Button.AB, function () {
+    input.calibrateCompass()
+})
 function writeAccOnly () {
     comment = "Ouptut Mode 1"
     serial.writeLine("" + thisLine + input.acceleration(Dimension.X) + delimiter + input.acceleration(Dimension.Y) + delimiter + input.acceleration(Dimension.Z))
